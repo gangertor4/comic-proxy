@@ -15,7 +15,7 @@ app.get('/search', async (req, res) => {
         const query = req.query.q;
         const response = await fetch(`https://www.comics.org/api/series/?name=${encodeURIComponent(query)}`, { headers: HEADERS });
         const data = await response.json();
-        res.jsonp(data); // ДОБАВИЛИ БУКВУ p ЗДЕСЬ
+        res.jsonp(data); // <-- ВАЖНО: jsonp с буквой p
     } catch (error) {
         res.status(500).jsonp({ error: error.message });
     }
@@ -26,7 +26,7 @@ app.get('/issue', async (req, res) => {
         const seriesId = req.query.series;
         const response = await fetch(`https://www.comics.org/api/issue/?series=${seriesId}&limit=1`, { headers: HEADERS });
         const data = await response.json();
-        res.jsonp(data); // И ДОБАВИЛИ БУКВУ p ЗДЕСЬ
+        res.jsonp(data); // <-- ВАЖНО: jsonp с буквой p
     } catch (error) {
         res.status(500).jsonp({ error: error.message });
     }
